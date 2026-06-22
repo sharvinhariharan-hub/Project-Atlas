@@ -17,7 +17,7 @@ Atlas travel thing
 <div class="top">
 <a>home</a>
 <a>trips</a>
->money</a>
+<a>money</a>
 <a>places</a>
 
 </div>
@@ -486,16 +486,26 @@ Total trips : 0
 </div>
 
 
-<div class="saved">
+
+<div class="packing">
 
 
 <h1>
-Saved Trips
+Packing List
 </h1>
 
 
-<ul id="savedList">
+<input id="itemInput">
 
+
+<button onclick="addItem()">
+
+Add Item
+
+</button>
+
+
+<ul id="items">
 
 </ul>
 
@@ -504,22 +514,33 @@ Saved Trips
 
 
 
-
-
-
-
-<div class="packing">
-
-   packing list code here...
-
-</div>
-
-
-
-
 <div class="notes">
 
-   notes code here...
+
+<h1>
+Travel Notes
+</h1>
+
+
+<textarea id="noteBox"></textarea>
+
+
+<br>
+
+
+<button onclick="saveNote()">
+
+Save Note
+
+</button>
+
+
+<p id="savedNote">
+
+No notes
+
+</p>
+
 
 </div>
 
