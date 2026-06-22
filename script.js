@@ -363,7 +363,6 @@ function addActivity(){
 let activity=document.getElementById("activityInput").value
 
 
-}
 
 if(activity==""){
 
@@ -372,7 +371,6 @@ alert("empty activity")
 return
 
 }
-
 
 
 
@@ -386,6 +384,8 @@ showActivity()
 
 document.getElementById("activityInput").value=""
 
+
+}
 
 
 
