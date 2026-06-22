@@ -1,81 +1,73 @@
-alert("welcome to atlas")
+alert("Welcome to Atlas")
 
 
+
+
+// ----------------
+// start button
+// ----------------
 
 
 function hello(){
 
-alert("start planning clicked")
+alert("Start planning clicked")
 
 }
 
 
 
 
+
+// ----------------
+// budget calculator
+// ----------------
 
 
 function calculate(){
 
 
-let a = document.getElementById("hotel").value
+let hotel = Number(document.getElementById("hotel").value)
 
-let b = document.getElementById("food").value
+let food = Number(document.getElementById("food").value)
 
-let c = document.getElementById("travel").value
+let travel = Number(document.getElementById("travel").value)
 
-let d = document.getElementById("days").value
-
-
-
-
-// convert text into numbers
-
-a = Number(a)
-
-b = Number(b)
-
-c = Number(c)
-
-d = Number(d)
+let days = Number(document.getElementById("days").value)
 
 
 
-
-
-let total = a + b + c
-
-
-let final = total * d
+let total = (hotel + food + travel) * days
 
 
 
+document.getElementById("result").innerHTML =
 
-document.getElementById("result").innerHTML = 
-"Your trip needs around ₹" + final
-
+"Your trip needs around ₹" + total
 
 
 
 }
+
+
+
+// ----------------
+// saved trips
+// ----------------
+
 
 let trips = []
 
 
 
-let oldData = localStorage.getItem("myTrips")
+if(localStorage.getItem("myTrips")){
 
 
-
-if(oldData != null){
-
-
-trips = JSON.parse(oldData)
-
-
-showTrips()
+trips = JSON.parse(localStorage.getItem("myTrips"))
 
 
 }
+
+
 
 
 
@@ -83,111 +75,33 @@ showTrips()
 
 function saveJapan(){
 
-
 trips.push("Japan")
-
 
 showTrips()
 
-
 }
-
-
-
-
 
 
 
 function saveFrance(){
 
-
 trips.push("France")
-
 
 showTrips()
 
-
 }
-
-
-
-
-
-
 
 
 
 function saveAustralia(){
 
-
 trips.push("Australia")
-
 
 showTrips()
 
-
 }
 
 
-
-
-
-
-
-
-
-function showTrips(){
-
-
-let area = document.getElementById("savedList")
-
-
-area.innerHTML = ""
-
-
-
-
-
-for(let i=0;i<trips.length;i++){
-
-
-
-area.innerHTML += 
-
-"<li>" + trips[i] + "</li>"
-
-
-
-}
-
-
-
-
-
-document.getElementById("tripCounter").innerHTML =
-
-"Total trips : " + trips.length
-
-
-
-
-
-localStorage.setItem(
-"myTrips",
-JSON.stringify(trips)
-)
-
-
-
-}
-
-
-
-
-localStorage.setItem(
-"myTrips",
-JSON.stringify(trips)
-)
 
 
 
@@ -199,37 +113,28 @@ function addMyTrip(){
 
 let name = document.getElementById("tripName").value
 
-
 let country = document.getElementById("countryName").value
-
 
 let days = document.getElementById("tripDays").value
 
 
 
 
+if(name==""){
 
-
-if(name == ""){
-
-
-alert("write trip name")
+alert("Enter trip name")
 
 return
-
 
 }
 
 
 
-
-
-let fullTrip = name + " - " + country + " - " + days + " days"
-
+let trip = name+" - "+country+" - "+days+" days"
 
 
 
-trips.push(fullTrip)
+trips.push(trip)
 
 
 
@@ -237,29 +142,89 @@ showTrips()
 
 
 
-
-
-document.getElementById("msg").innerHTML =
-"Added " + name
-
-
-
-
-
-
-document.getElementById("tripName").value=""
-
-document.getElementById("countryName").value=""
-
-document.getElementById("tripDays").value=""
-
+document.getElementById("msg").innerHTML="Trip Added"
 
 
 
 }
 
 
-let packingStuff = []
+
+
+function showTrips(){
+
+
+
+let box=document.getElementById("savedList")
+
+
+box.innerHTML=""
+
+
+
+
+for(let i=0;i<trips.length;i++){
+
+
+box.innerHTML += "<li>"+trips[i]+"</li>"
+
+
+}
+
+
+
+
+
+localStorage.setItem(
+
+"myTrips",
+
+JSON.stringify(trips)
+
+)
+
+
+
+
+
+if(document.getElementById("tripCounter")){
+
+
+document.getElementById("tripCounter").innerHTML=
+
+"Total trips : "+trips.length
+
+
+}
+
+
+
+updateDashboard()
+
+
+}
+
+
+
+
+
+// ----------------
+// packing
+// ----------------
+
+
+
+let packingStuff=[]
+
+
+
+if(localStorage.getItem("packing")){
+
+
+packingStuff = JSON.parse(localStorage.getItem("packing"))
+
+
+}
 
 
 
@@ -269,43 +234,33 @@ function addItem(){
 
 
 
-let thing = document.getElementById("itemInput").value
+let item=document.getElementById("itemInput").value
 
 
 
 
-if(thing==""){
+if(item==""){
 
-
-alert("enter something")
+alert("Enter item")
 
 return
-
 
 }
 
 
 
 
-packingStuff.push(thing)
-
+packingStuff.push(item)
 
 
 
 showItems()
 
 
-
 document.getElementById("itemInput").value=""
 
 
-
 }
-
-
-
-
-
 
 
 
@@ -314,7 +269,7 @@ function showItems(){
 
 
 
-let list = document.getElementById("items")
+let list=document.getElementById("items")
 
 
 list.innerHTML=""
@@ -322,549 +277,20 @@ list.innerHTML=""
 
 
 
-for(let x=0;x<packingStuff.length;x++){
+
+for(let i=0;i<packingStuff.length;i++){
 
 
 
-list.innerHTML += 
+list.innerHTML +=
 
-"<li>" 
-+ packingStuff[x] 
-+ 
-" <button onclick='removeItem("+x+")'>delete</button></li>"
+"<li>"+packingStuff[i]+
 
-
-
-}
-
+"<button onclick='removeItem("+i+")'>delete</button></li>"
 
 
 }
 
-
-
-
-
-
-
-
-
-function removeItem(number){
-
-
-
-packingStuff.splice(number,1)
-
-
-
-showItems()
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-function saveNote(){
-
-
-
-let note = document.getElementById("noteBox").value
-
-
-
-
-
-document.getElementById("savedNote").innerHTML = note
-
-
-
-
-localStorage.setItem("note",note)
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-let oldNote = localStorage.getItem("note")
-
-
-
-if(oldNote != null){
-
-
-
-document.getElementById("savedNote").innerHTML = oldNote
-
-
-
-}
-
-let activities = []
-
-
-
-
-
-function addActivity(){
-
-
-let a = document.getElementById("activityInput").value
-
-
-
-if(a==""){
-
-
-alert("empty activity")
-
-
-return
-
-
-}
-
-
-
-
-activities.push(a)
-
-
-
-showActivity()
-
-
-
-}
-
-
-
-
-
-
-
-
-function showActivity(){
-
-
-
-let box = document.getElementById("activityList")
-
-
-box.innerHTML=""
-
-
-
-
-for(let i=0;i<activities.length;i++){
-
-
-
-box.innerHTML += "<li>"+activities[i]+"</li>"
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-function weatherCheck(){
-
-
-
-let place = document.getElementById("weatherPlace").value
-
-
-
-
-
-if(place==""){
-
-
-document.getElementById("weatherAnswer").innerHTML=
-"Enter place first"
-
-
-
-}else{
-
-
-
-document.getElementById("weatherAnswer").innerHTML=
-
-place + " looks sunny today ☀️"
-
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-function checkLevel(){
-
-
-
-let value = document.getElementById("level").value
-
-
-
-
-if(value=="Easy"){
-
-
-document.getElementById("levelText").innerHTML =
-"Relax trip"
-
-
-}
-
-
-
-
-
-if(value=="Medium"){
-
-
-
-document.getElementById("levelText").innerHTML =
-"Normal adventure"
-
-
-
-}
-
-
-
-
-
-
-if(value=="Hard"){
-
-
-
-document.getElementById("levelText").innerHTML =
-"Be ready for challenge"
-
-
-
-}
-
-
-
-
-
-}
-
-function darkMode(){
-
-
-
-document.body.classList.toggle("dark")
-
-
-
-}
-
-
-
-
-
-
-
-// small fix because activity input was not clearing
-
-
-let oldAdd = addActivity
-
-
-
-addActivity=function(){
-
-
-let a = document.getElementById("activityInput").value
-
-
-
-if(a==""){
-
-
-alert("empty activity")
-
-
-return
-
-
-}
-
-
-
-
-
-activities.push(a)
-
-
-showActivity()
-
-
-
-document.getElementById("activityInput").value=""
-
-
-}
-
-function updateDashboard(){
-
-
-
-document.getElementById("dashTrips").innerHTML =
-trips.length
-
-
-
-document.getElementById("dashActivities").innerHTML =
-activities.length
-
-
-
-}
-
-
-
-
-
-
-
-
-
-function searchPlace(){
-
-
-
-let search = document.getElementById("searchInput").value
-
-
-
-
-
-if(search==""){
-
-
-
-document.getElementById("searchResult").innerHTML =
-"Nothing searched"
-
-
-
-return
-
-
-}
-
-
-
-
-
-document.getElementById("searchResult").innerHTML =
-
-"Showing results for " + search
-
-
-
-}
-
-
-
-
-
-
-
-
-
-function rateTrip(){
-
-
-
-let rating = document.getElementById("rateNumber").value
-
-
-
-
-
-if(rating>=8){
-
-
-document.getElementById("ratingText").innerHTML =
-"Amazing trip ⭐⭐⭐"
-
-
-}
-
-
-
-
-
-else if(rating>=5){
-
-
-document.getElementById("ratingText").innerHTML =
-"Good trip ⭐⭐"
-
-
-}
-
-
-
-
-else{
-
-
-document.getElementById("ratingText").innerHTML =
-"Could improve ⭐"
-
-
-}
-
-
-
-
-}
-
-
-
-
-// adding dashboard update into old functions badly
-
-
-let oldShowTrips = showTrips
-
-
-
-showTrips=function(){
-
-
-
-oldShowTrips()
-
-
-
-updateDashboard()
-
-
-
-}
-
-
-
-
-
-
-
-let oldActivityShow = showActivity
-
-
-
-showActivity=function(){
-
-
-
-oldActivityShow()
-
-
-
-updateDashboard()
-
-
-
-} 
-
-function makeSummary(){
-
-
-
-let text = ""
-
-
-
-
-
-text += "Trips planned: " + trips.length
-
-text += "<br>"
-
-
-text += "Activities: " + activities.length
-
-text += "<br>"
-
-
-text += "Packing items: " + packingStuff.length
-
-
-
-
-
-
-
-document.getElementById("summary").innt
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-// save packing list finally
-
-
-
-function savePacking(){
 
 
 
@@ -877,28 +303,115 @@ JSON.stringify(packingStuff)
 )
 
 
+
 }
 
 
 
 
+function removeItem(i){
 
 
-
-let oldPackingData = localStorage.getItem("packing")
-
-
-
-if(oldPackingData != null){
-
-
-
-packingStuff = JSON.parse(oldPackingData)
+packingStuff.splice(i,1)
 
 
 showItems()
 
 
+}
+
+
+
+
+
+// ----------------
+// notes
+// ----------------
+
+
+
+function saveNote(){
+
+
+let note=document.getElementById("noteBox").value
+
+
+localStorage.setItem("note",note)
+
+
+document.getElementById("savedNote").innerHTML=note
+
+
+}
+
+
+
+// ----------------
+// activities
+// ----------------
+
+
+
+let activities=[]
+
+
+
+
+function addActivity(){
+
+
+let activity=document.getElementById("activityInput").value
+
+
+}
+
+if(activity==""){
+
+alert("empty activity")
+
+return
+
+}
+
+
+
+
+activities.push(activity)
+
+
+
+showActivity()
+
+
+
+document.getElementById("activityInput").value=""
+
+
+
+
+function showActivity(){
+
+
+let box=document.getElementById("activityList")
+
+
+box.innerHTML=""
+
+
+
+for(let i=0;i<activities.length;i++){
+
+
+
+box.innerHTML+="<li>"+activities[i]+"</li>"
+
+
+}
+
+
+
+updateDashboard()
+
 
 }
 
@@ -906,25 +419,101 @@ showItems()
 
 
 
+// ----------------
+// weather
+// ----------------
+
+
+function weatherCheck(){
+
+
+let place=document.getElementById("weatherPlace").value
+
+
+
+if(place==""){
+
+
+document.getElementById("weatherAnswer").innerHTML=
+
+"Enter a place"
+
+
+}
+
+
+else{
+
+
+document.getElementById("weatherAnswer").innerHTML=
+
+place+" looks sunny today ☀️"
+
+
+}
+
+
+}
 
 
 
 
-let oldItemFunction = addItem
+// ----------------
+// difficulty
+// ----------------
+
+
+
+function checkLevel(){
+
+
+
+let level=document.getElementById("level").value
 
 
 
 
-addItem=function(){
+if(level=="Easy"){
+
+document.getElementById("levelText").innerHTML="Relax trip"
+
+}
 
 
 
-oldItemFunction()
+if(level=="Medium"){
+
+document.getElementById("levelText").innerHTML="Normal adventure"
+
+}
 
 
 
-savePacking()
+if(level=="Hard"){
 
+document.getElementById("levelText").innerHTML="Big challenge"
+
+}
+
+
+
+}
+
+
+// ----------------
+// search
+// ----------------
+
+
+function searchPlace(){
+
+
+let search=document.getElementById("searchInput").value
+
+
+document.getElementById("searchResult").innerHTML=
+
+"Showing results for "+search
 
 
 }
@@ -933,24 +522,56 @@ savePacking()
 
 
 
+// ----------------
+// rating
+// ----------------
+
+
+function rateTrip(){
+
+
+
+let rate=document.getElementById("rateNumber").value
 
 
 
 
-let oldRemove = removeItem
+if(rate>=8){
+
+document.getElementById("ratingText").innerHTML="Amazing ⭐⭐⭐"
+
+}
+
+
+else if(rate>=5){
+
+document.getElementById("ratingText").innerHTML="Good ⭐⭐"
+
+}
+
+
+else{
+
+document.getElementById("ratingText").innerHTML="Could improve ⭐"
+
+}
+
+
+}
+
+// ----------------
+// dashboard
+// ----------------
+
+
+function updateDashboard(){
 
 
 
-removeItem=function(number){
+if(document.getElementById("dashTrips")){
 
 
-
-oldRemove(number)
-
-
-
-savePacking()
-
+document.getElementById("dashTrips").innerHTML=trips.length
 
 
 }
@@ -959,23 +580,13 @@ savePacking()
 
 
 
+if(document.getElementById("dashActivities")){
 
 
+document.getElementById("dashActivities").innerHTML=activities.length
 
 
-// remember dark mode
-
-
-let darkSaved = localStorage.getItem("dark")
-
-
-
-
-if(darkSaved=="yes"){
-
-
-
-document.body.classList.add("dark")
+}
 
 
 
@@ -984,19 +595,15 @@ document.body.classList.add("dark")
 
 
 
+// ----------------
+// dark mode
+// ----------------
 
 
-
-let oldDark = darkMode
-
+function darkMode(){
 
 
-
-darkMode=function(){
-
-
-
-oldDark()
+document.body.classList.toggle("dark")
 
 
 
@@ -1018,5 +625,81 @@ localStorage.setItem("dark","no")
 }
 
 
+}
 
-} 
+
+
+
+
+
+
+
+
+
+// ----------------
+// summary
+// ----------------
+
+
+function makeSummary(){
+
+
+
+document.getElementById("summary").innerHTML =
+
+
+"Trips: "+trips.length+
+
+"<br>Activities: "+activities.length+
+
+"<br>Packing Items: "+packingStuff.length
+
+
+
+}
+
+
+
+
+// load old data
+
+
+window.onload=function(){
+
+
+
+showTrips()
+
+showItems()
+
+updateDashboard()
+
+
+
+let note=localStorage.getItem("note")
+
+
+
+if(note){
+
+
+document.getElementById("savedNote").innerHTML=note
+
+
+}
+
+
+
+
+
+if(localStorage.getItem("dark")=="yes"){
+
+
+document.body.classList.add("dark")
+
+
+}
+
+
+
+}
