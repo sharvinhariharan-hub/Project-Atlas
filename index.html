@@ -209,7 +209,7 @@ Enter your trip details here
 Hotel cost
 </p>
 
-<input id=""hotel">
+<input id="hotel">
 
 
 
@@ -276,13 +276,616 @@ Your money will show here
 
 </div>
 
+<div class="places">
 
 
+<h1>
+Popular Places
+</h1>
+
+
+<p>
+Some places you can visit
+</p>
+
+
+
+
+
+<div class="placeBox">
+
+
+<div class="city">
+
+
+<h2>
+Japan
+</h2>
+
+
+<p>
+Mountains, cities and food
+</p>
+
+
+<button onclick="saveJapan()">
+
+Save
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="city">
+
+
+<h2>
+France
+</h2>
+
+
+<p>
+Old buildings and nice views
+</p>
+
+
+<button onclick="saveFrance()">
+
+Save
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="city">
+
+
+<h2>
+Australia
+</h2>
+
+
+<p>
+Beaches and adventures
+</p>
+
+
+<button onclick="saveAustralia()">
+
+Save
+
+</button>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+<div class="makeTrip">
+
+
+<h1>
+Make Your Own Trip
+</h1>
+
+
+<p>
+Create a new travel plan
+</p>
+
+
+
+<div class="inputs">
+
+
+<p>
+Trip Name
+</p>
+
+
+<input id="tripName">
+
+
+
+
+<p>
+Country
+</p>
+
+
+<input id="countryName">
+
+
+
+
+
+<p>
+Number of Days
+</p>
+
+
+<input id="tripDays">
+
+
+
+
+<br>
+<br>
+
+
+
+<button onclick="addMyTrip()">
+
+Add Trip
+
+</button>
+
+
+
+
+</div>
+
+
+
+
+
+<div class="message">
+
+
+<p id="msg">
+
+Nothing added yet
+
+</p>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="saved">
+
+
+<h1>
+Saved Trips
+</h1>
+
+
+<h2 id="tripCounter">
+
+Total trips : 0
+
+</h2>"
+
+
+<ul id="savedList">
+
+
+</ul>
+
+
+</div>
+
+
+<div class="saved">
+
+
+<h1>
+Saved Trips
+</h1>
+
+
+<ul id="savedList">
+
+
+</ul>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="packing">
+
+   packing list code here...
+
+</div>
+
+
+
+
+<div class="notes">
+
+   notes code here...
+
+</div>
+
+
+
+<div class=""activity">
+
+
+<h1>
+Trip Activity Tracker
+</h1>
+
+
+<p>
+Add things you want to do
+</p>
+
+
+
+<input id="activityInput">
+
+
+<button onclick="addActivity()">
+
+Add Activity
+
+</button>
+
+
+
+
+
+<ul id="activityList">
+
+
+</ul>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="weatherBox">
+
+
+<h1>
+Travel Weather Checker
+</h1>
+
+
+<p>
+Type a place and get travel weather
+</p>
+
+
+
+<input id="weatherPlace">
+
+
+
+<button onclick="weatherCheck()">
+
+Check
+
+</button>
+
+
+
+
+<h2 id="weatherAnswer">
+
+No weather searched
+
+</h2>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="difficulty">
+
+
+<h1>
+Trip Difficulty</h1>
+
+
+<select id="level">
+
+
+<option>
+Easy
+</option>
+
+
+<option>
+Medium
+</option>
+
+
+<option>
+Hard
+</option>
+
+
+</select>
+
+
+<button onclick="checkLevel()">
+
+Check Level
+
+</button>
+
+
+
+<p id="levelText">
+
+Choose difficulty
+
+</p>
+
+
+
+
+</div>"
+
+
+<div class=""dashboard">
+
+
+<h1>
+Travel Dashboard
+</h1>
+
+
+
+<div class="dashCards">
+
+
+
+<div class="dash">
+
+<h2 id="dashTrips">
+0
+</h2>
+
+<p>
+Saved Trips
+</p>
+
+</div>
+
+
+
+
+
+<div class="dash">
+
+<h2 id="dashActivities">
+0
+</h2>
+
+<p>
+Activities Added
+</p>
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="searchArea">
+
+
+<h1>
+Find Destination
+</h1>
+
+
+
+<input id="searchInput">
+
+
+<button onclick="searchPlace()">
+
+Search
+
+</button>
+
+
+
+<p id="searchResult">
+
+Search something
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="rating">
+
+
+<h1>
+Rate Your Trip
+</h1>
+
+
+
+<p>
+How was your experience?
+</p>
+
+
+
+<input id="rateNumber"
+placeholder="1-10">
+
+
+
+<button onclick="rateTrip()">
+
+Rate
+
+</button>
+
+
+
+<h2 id="ratingText">
+
+No rating
+
+</h2>
+
+
+
+</div>
+
+<div class=""finalBox">
+
+
+<h1>
+Travel Summary
+</h1>
+
+
+
+<p>
+Generate a small overview of your travel planning.
+</p>
+
+
+
+<button onclick="makeSummary()">
+
+Create Summary
+
+</button>
+
+
+
+<div id="summary">
+
+
+Nothing created
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="about">
+
+
+<h1>
+About Atlas
+</h1>
+
+
+
+<p>
+
+Atlas started as a small weekend project for learning
+HTML CSS and JavaScript.
+
+</p>
+
+
+
+<p>
+
+It is not perfect but slowly improved with each update.
+
+</p>
+
+
+
+</div>
 
 <script src="script.js"></script>
 
 
 </body>
 
-
 </html>"
+
+
